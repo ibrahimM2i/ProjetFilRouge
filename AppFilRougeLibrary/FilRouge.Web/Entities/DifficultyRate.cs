@@ -11,7 +11,7 @@ namespace FilRouge.Web.Entities
     public partial class DifficultyRate
     {
         #region Properties
-        //Clé composée de l'id d'un quizz et d'une difficultée
+        //Clé composée de l'id d'un quizz et d'une difficulté
         [Key]
         [Column(Order = 0)]
         [ForeignKey("DifficultyMaster")]
