@@ -171,6 +171,16 @@
     <Compile Include="Services\QuizzExceptions.cs" />
     <Compile Include="Services\QuizzService.cs" />
     <Compile Include="Services\ReferencesService.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
+    <Compile Include="ViewModels\DifficultyMasterViewModel.cs" />
+    <Compile Include="ViewModels\DifficultyRateViewModel.cs" />
+    <Compile Include="ViewModels\DifficultyViewModel.cs" />
+    <Compile Include="ViewModels\Maps\Map.cs" />
+    <Compile Include="ViewModels\QuestionsViewModel.cs" />
+    <Compile Include="ViewModels\QuizzViewModel.cs" />
+    <Compile Include="ViewModels\ReponseViewModel.cs" />
+    <Compile Include="ViewModels\TechnologyViewModel.cs" />
+    <Compile Include="ViewModels\TypeQuestionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
