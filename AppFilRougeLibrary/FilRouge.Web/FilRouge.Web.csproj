@@ -162,6 +162,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803300824387_Migrationv1.cs" />
+    <Compile Include="Migrations\201803300824387_Migrationv1.Designer.cs">
+      <DependentUpon>201803300824387_Migrationv1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\QuizzExceptions.cs" />
     <Compile Include="Services\QuizzService.cs" />
@@ -222,6 +227,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803300824387_Migrationv1.resx">
+      <DependentUpon>201803300824387_Migrationv1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

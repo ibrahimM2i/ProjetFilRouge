@@ -79,16 +79,15 @@ namespace FilRouge.Web.Services
             
             return desQuizz;
         }
+
         /// <summary>
-        /// 
+        /// Ajouter une question dans le Quizz.
         /// </summary>
         /// <param name="questionsQuizz"></param>
         /// <param name="lesQuestions"></param>
         /// <param name="questionlibre"></param>
         /// <param name="nombrequestions"></param>
-        /// <returns></returns>
-        ///
-        
+        /// <returns></returns>        
         public static List<Questions> AddQuestionToQuizz(bool questionlibre, int nombrequestions, int technoid, int difficultymasterid)
         {
             Random rand = new Random();
@@ -98,7 +97,7 @@ namespace FilRouge.Web.Services
             try
             {
                 int nbrTotalQuestions = db.Questions.Select(e => e).Count();
-                IQueryable<Questions> AllQuestionsByTechno = db.Questions.Where(e => e.TechnologyId == technoid);
+                IQueryable<Questions> AllQuestionsByTechno = db.Questions.Where(e => e.TechnologyId == technoid && e.Active);
                 IQueryable<DifficultyRate> RatesQuizz = db.DifficultyRates.Where(e => e.DifficultyMasterId == difficultymasterid);
 
                 foreach (var rate in RatesQuizz)
@@ -107,9 +106,9 @@ namespace FilRouge.Web.Services
                     {
                         foreach (var question in AllQuestionsByTechno)
                         {//Vérification par id de la présence d'une question
-                            if(question.QuestionId == rand.Next(0, nbrTotalQuestions))
+                            if(!(sortedQuestionsQuizz.Contains(question)))
                             {
-
+                                sortedQuestionsQuizz.Add(question);
                             }
                         }
                     }
@@ -123,7 +122,7 @@ namespace FilRouge.Web.Services
             }
            
 
-            return questionsQuizz;
+            return sortedQuestionsQuizz;
         }
         /// <summary>
         /// 
@@ -137,7 +136,7 @@ namespace FilRouge.Web.Services
         /// <param name="nombrequestions"></param>
         public static void CreateQuizz(int userid, int difficultymasterid, int technoid,string nomuser, string prenomuser, bool questionlibre, int nombrequestions)
         {
-            List<Questions> questionsQuizz = AddQuestionToQuizz();
+            List<Questions> questionsQuizz = AddQuestionToQuizz(questionlibre, nombrequestions, technoid, difficultymasterid);
             int timer = 0;
             FilRougeDBContext db = new FilRougeDBContext();
             try

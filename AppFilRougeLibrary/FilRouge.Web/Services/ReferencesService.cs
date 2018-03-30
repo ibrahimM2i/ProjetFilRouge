@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FilRouge.Entities.Entity;
 using FilRouge.Web.Entities;
 
 namespace FilRouge.Web.Services
@@ -31,14 +30,13 @@ namespace FilRouge.Web.Services
         public List<Technology> GetTechnologies()
         {
             
-            List<Technology> desTechnologies =new List<Technology>();
-            FilRougeDBContext db = new FilRougeDBContext();
-            var fluentQuery = db.Technologies.Select(e => e);
-            foreach (var item in fluentQuery)
+            List<Technology> desTechnologies = new List<Technology>();
+            //FilRougeDBContext db = new FilRougeDBContext();
+            using (var db = new FilRougeDBContext())
             {
-                desTechnologies.Add(item);
+                desTechnologies = db.Technologies.Select(e => e).ToList();
             }
-            db.Dispose();
+
             return desTechnologies;
         }
         /// <summary>
@@ -49,13 +47,19 @@ namespace FilRouge.Web.Services
         public List<Difficulty> GetDifficulties()
         {
             List<Difficulty> desDifficulties = new List<Difficulty>();
-            FilRougeDBContext db = new FilRougeDBContext();
+
+            using (var db = new FilRougeDBContext())
+            {
+                desDifficulties = db.Difficulties.Select(e => e).ToList();
+            }
+
+            /*FilRougeDBContext db = new FilRougeDBContext();
             var fluentQuery = db.Difficulties.Select(e => e);
             foreach (var item in fluentQuery)
             {
                 desDifficulties.Add(item);
             }
-            db.Dispose();
+            db.Dispose();*/
             return desDifficulties;
         }
         #endregion
