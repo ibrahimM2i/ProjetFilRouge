@@ -1,0 +1,48 @@
+﻿@using FilRouge.Web.ViewModels.Maps
+@model FilRouge.Web.ViewModels.QuestionViewModel
+@{
+	ViewBag.Title = "QuestionsViewModel";
+}
+<h2>Ajouter une question</h2>
+
+<div class="row">
+	<div class="col-md-4">
+		@Html.HiddenFor(m => m.QuestionId)
+		<h1> Verification</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.TechnologyId, (List<SelectListItem>)ViewBag.Technologies, "Selectionner une Technologie")
+		@Html.ValidationMessageFor(m => m.TechnologyId)
+	</div>	
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.QuestionTypeId, (List<SelectListItem>)ViewBag.QuestionType, "Selectionner un type de Question")
+		@Html.ValidationMessageFor(m => m.QuestionTypeId)
+	</div>
+</div>
+<div class="row">
+<div class="row">
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.Content)
+		@Html.EditorFor(m => m.Content)
+		@Html.ValidationMessageFor(m => m.Content)
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		@Html.LabelFor(m => m.Commentaire)
+		@Html.EditorFor(m => m.Commentaire)
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		<!--A cacher
+		Selectioner à true si Choix libre
+		Selectioner à false si Choix Multiple / unique 
+		a gerer avec JS -->
+		@Html.LabelFor(m => m.Active)
+		@Html.ValidationMessageFor(m => m.Active)
+		@Html.CheckBoxFor(m => m.Active)
+	</div>
+</div>

@@ -8,11 +8,9 @@ namespace FilRouge.Web.ViewModels
 {
 	public class TypeQuestionViewModel
 	{
-		public int Id { get; set; }
-		[Required]
-		[Display(Name = "Nom étudiant : ")]
-		public string Name { get; set; }
-		public int TypeQuestionId { get; set; }
-		public string NameType { get; set; }
+		//[Required]
+		//public int TypeQuestionId { get; set; }
+		//[Display(Name = "Type de Question ")]
+		//public string NameType { get; set; }
 	}
 }
