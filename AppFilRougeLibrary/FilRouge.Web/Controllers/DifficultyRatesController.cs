@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,24 +7,28 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FilRouge.Web.Entities;
+using FilRouge.Web.Services;
 
 namespace FilRouge.Web.Controllers
 {
     public class DifficultyRatesController : Controller
     {
         private FilRougeDBContext db = new FilRougeDBContext();
+        private readonly DifficultyRatesServices _difficultyRatesServices = new DifficultyRatesServices();
 
         // GET: DifficultyRates
         public ActionResult Index()
         {
-            var difficultyRates = db.DifficultyRates.Include(d => d.Difficulty).Include(d => d.DifficultyMaster);
-            return View(difficultyRates.ToList());
+            var difficultyRates = _difficultyRatesServices.GetAllDifficultyRates();
+            return View(difficultyRates);
         }
 
         // GET: DifficultyRates/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id, int idMaster)
         {
-            return View(serviceDifficulty.GetDifficultyById(id));
+
+            return View();
+            //return View(serviceDifficulty.GetDifficultyById(id));
         }
 
         // GET: DifficultyRates/Create

@@ -11,9 +11,9 @@ namespace FilRouge.Web.Services
 {
     public class DifficultyServices
     {
-        public List<DifficultyMasterViewModel> GetAllDifficulties()
+        public List<DifficultyViewModel> GetAllDifficulties()
         {
-            var diffiicultyViewModel = new List<DifficultyMasterViewModel>();
+            var diffiicultyViewModel = new List<DifficultyViewModel>();
             using (var dbContext = new FilRougeDBContext())
             {
                 var difficultyEntities = dbContext.Difficulties.ToList();
@@ -27,25 +27,24 @@ namespace FilRouge.Web.Services
             return diffiicultyViewModel;
         }
 
-        public DifficultyMasterViewModel GetDifficultyById(int difficultyId)
+        public DifficultyViewModel GetDifficultyById(int difficultyId)
         {
-            var difficultyViewModel = new DifficultyMasterViewModel();
+            var difficultyViewModel = new DifficultyViewModel();
             using (var dbContext = new FilRougeDBContext())
             {
-                var difficultyEntities = dbContext.Difficulties.Find(difficultyId);
+               var difficultyEntities = dbContext.Difficulties.Find(difficultyId);
                difficultyViewModel = difficultyEntities.MapToDifficultyViewModel();
             }
 
             return difficultyViewModel;
         }
 
-        public int AddDifficulty(DifficultyMasterViewModel difficultyViewModel)
+        public int AddDifficulty(Difficulty difficulty)
         {
             int id = 0;
 
             using (var dbContext = new FilRougeDBContext())
             {
-                var difficulty = difficultyViewModel.MapToDifficulty();
                 dbContext.Difficulties.Add(difficulty);
                 dbContext.SaveChanges();
                 id = difficulty.DifficultyId;
@@ -53,7 +52,7 @@ namespace FilRouge.Web.Services
             return id;
         }
 
-        public int EditDifficulty(DifficultyMasterViewModel difficultyViewModel)
+        public int EditDifficulty(Difficulty difficultyViewModel)
         {
             var id = 0;
             using (var dbContext = new FilRougeDBContext())

@@ -7,27 +7,25 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FilRouge.Web.Entities;
+using FilRouge.Web.Services;
 
 namespace FilRouge.Web.Controllers
 {
     public class DifficultiesController : Controller
     {
-        private FilRougeDBContext db = new FilRougeDBContext();
+        private DifficultyServices _difficultyServices = new DifficultyServices();
 
         // GET: Difficulties
         public ActionResult Index()
         {
-            return View(db.Difficulties.ToList());
+            var difficulty = _difficultyServices.GetAllDifficulties();
+            return View(difficulty);
         }
 
         // GET: Difficulties/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Difficulty difficulty = db.Difficulties.Find(id);
+            var difficulty = _difficultyServices.GetDifficultyById(id);
             if (difficulty == null)
             {
                 return HttpNotFound();
@@ -50,8 +48,7 @@ namespace FilRouge.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Difficulties.Add(difficulty);
-                db.SaveChanges();
+                _difficultyServices.AddDifficulty(difficulty);
                 return RedirectToAction("Index");
             }
 
@@ -59,17 +56,9 @@ namespace FilRouge.Web.Controllers
         }
 
         // GET: Difficulties/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Difficulty difficulty = db.Difficulties.Find(id);
-            if (difficulty == null)
-            {
-                return HttpNotFound();
-            }
+            var difficulty = _difficultyServices.GetDifficultyById(id);
             return View(difficulty);
         }
 
@@ -82,46 +71,10 @@ namespace FilRouge.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(difficulty).State = EntityState.Modified;
-                db.SaveChanges();
+                _difficultyServices.EditDifficulty(difficulty);
                 return RedirectToAction("Index");
             }
             return View(difficulty);
-        }
-
-        // GET: Difficulties/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Difficulty difficulty = db.Difficulties.Find(id);
-            if (difficulty == null)
-            {
-                return HttpNotFound();
-            }
-            return View(difficulty);
-        }
-
-        // POST: Difficulties/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Difficulty difficulty = db.Difficulties.Find(id);
-            db.Difficulties.Remove(difficulty);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

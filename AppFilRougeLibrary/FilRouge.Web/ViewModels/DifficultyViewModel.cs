@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FilRouge.Web.ViewModels
 {
-	public class DifficultyMasterViewModel
+	public class DifficultyViewModel
 	{
         public int DifficultyId { get; set; }
         [Required]

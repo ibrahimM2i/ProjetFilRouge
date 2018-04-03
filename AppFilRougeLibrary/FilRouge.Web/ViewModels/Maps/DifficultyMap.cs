@@ -13,14 +13,15 @@ namespace FilRouge.Web.ViewModels.Maps
         /// </summary>
         /// <param name="difficulty"></param>
         /// <returns>New DifficultyViewModel</returns>
-        public static DifficultyMasterViewModel MapToDifficultyViewModel(this Difficulty difficulty)
+        public static DifficultyViewModel MapToDifficultyViewModel(this Difficulty difficulty)
         {
-            var difficultyViewModel = new DifficultyMasterViewModel();
+            var difficultyViewModel = new DifficultyViewModel();
             if (difficulty == null)
                 return difficultyViewModel;
             else
             {
-                difficultyViewModel = new DifficultyMasterViewModel {
+                difficultyViewModel = new DifficultyViewModel
+                {
                     DifficultyId = difficulty.DifficultyId,
                     DifficultyName = difficulty.DifficultyName
                 };
@@ -33,7 +34,7 @@ namespace FilRouge.Web.ViewModels.Maps
         /// </summary>
         /// <param name="difficultyViewModel"></param>
         /// <returns>new Difficulty</returns>
-        public static Difficulty MapToDifficulty(this DifficultyMasterViewModel difficultyViewModel)
+        public static Difficulty MapToDifficulty(this DifficultyViewModel difficultyViewModel)
         {
             var difficulty = new Difficulty();
             if (difficultyViewModel == null)

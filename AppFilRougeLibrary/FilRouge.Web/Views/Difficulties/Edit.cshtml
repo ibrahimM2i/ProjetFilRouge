@@ -1,4 +1,4 @@
-﻿@model FilRouge.Web.Entities.Difficulty
+﻿@model FilRouge.Web.ViewModels.DifficultyViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Difficulty</h4>
         <hr />
