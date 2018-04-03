@@ -1,0 +1,22 @@
+﻿@model FilRouge.Web.ViewModels.DifficultyMasterViewModel
+@{
+    ViewBag.Title = "DifficultyMasterViewModel";
+}
+
+<h2>DifficultyViewModel</h2>
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>DifficultyViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.DiffMasterId, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.DifficultyName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DifficultyName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DifficultyName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
