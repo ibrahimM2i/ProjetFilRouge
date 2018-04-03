@@ -152,6 +152,8 @@
     <Compile Include="Controllers\DifficultyRatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\QuizzController.cs" />
+    <Compile Include="Controllers\ReponsesController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
     <Compile Include="Controllers\TypeQuestionsController.cs" />
     <Compile Include="Entities\Contact.cs" />
@@ -167,18 +169,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803301445162_MigrationV1.cs" />
-    <Compile Include="Migrations\201803301445162_MigrationV1.Designer.cs">
-      <DependentUpon>201803301445162_MigrationV1.cs</DependentUpon>
+    <Compile Include="Migrations\201804031142358_firstM.cs" />
+    <Compile Include="Migrations\201804031142358_firstM.Designer.cs">
+      <DependentUpon>201804031142358_firstM.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\DifficultyRatesServices.cs" />
     <Compile Include="Services\DifficultyServices.cs" />
+    <Compile Include="Services\QuestionService.cs" />
     <Compile Include="Services\QuizzExceptions.cs" />
     <Compile Include="Services\QuizzService.cs" />
     <Compile Include="Services\ReferencesService.cs" />
+    <Compile Include="Services\ReponsesServices.cs" />
     <Compile Include="Services\TechnologiesService.cs" />
     <Compile Include="Services\TypeQuestionsService.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
@@ -189,6 +193,8 @@
     <Compile Include="ViewModels\Maps\DifficultyRateMap.cs" />
     <Compile Include="ViewModels\Maps\Map.cs" />
     <Compile Include="ViewModels\Maps\QuestionMap.cs" />
+    <Compile Include="ViewModels\Maps\QuizzMap.cs" />
+    <Compile Include="ViewModels\Maps\ReponseMap.cs" />
     <Compile Include="ViewModels\QuestionsViewModel.cs" />
     <Compile Include="ViewModels\QuizzViewModel.cs" />
     <Compile Include="ViewModels\ReponseViewModel.cs" />
@@ -258,6 +264,17 @@
     <Content Include="Views\TypeQuestions\Create.cshtml" />
     <Content Include="Views\TypeQuestions\Details.cshtml" />
     <Content Include="Views\TypeQuestions\Index.cshtml" />
+    <Content Include="Views\Reponses\EditorTemplates\ReponseViewModel.cshtml" />
+    <Content Include="Views\Reponses\Create.cshtml" />
+    <Content Include="Views\Reponses\Edit.cshtml" />
+    <Content Include="Views\Reponses\Delete.cshtml" />
+    <Content Include="Views\Reponses\Details.cshtml" />
+    <Content Include="Views\Quizz\EditorTemplates\QuizzViewModel.cshtml" />
+    <Content Include="Views\Quizz\Create.cshtml" />
+    <Content Include="Views\Quizz\Details.cshtml" />
+    <Content Include="Views\Quizz\Delete.cshtml" />
+    <Content Include="Views\Quizz\Edit.cshtml" />
+    <Content Include="Views\Questions\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -277,8 +294,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803301445162_MigrationV1.resx">
-      <DependentUpon>201803301445162_MigrationV1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804031142358_firstM.resx">
+      <DependentUpon>201804031142358_firstM.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,6 +15,7 @@ namespace FilRouge.Web.Controllers
 	{
 		private readonly QuizzService _quizzService = new QuizzService();
 		private readonly ReferencesService _referencesService = new ReferencesService();
+		private readonly QuestionService _questionService = new QuestionService();
 		//private readonly StudentAttendanceService -studentAttendanceService = new StudentAttendanceService();
 		/// <summary>
 		/// Get:  Ajouter une question
@@ -42,7 +43,7 @@ namespace FilRouge.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_quizzService.AddQuestion(questionViewModel);
+				_questionService.AddQuestion(questionViewModel);
 				return RedirectToAction("Index", "Home");
 			}
 			var technologiesListItem = _referencesService.GetListItemsTechnologies();
@@ -56,7 +57,7 @@ namespace FilRouge.Web.Controllers
 
 		public ActionResult Questions()
 		{
-			var questions = _quizzService.GetAllQuestions();
+			var questions = _questionService.GetAllQuestions();
 
 			return View("Questions", questions);
 		}
@@ -67,7 +68,7 @@ namespace FilRouge.Web.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			QuestionViewModel questionViewModel = _quizzService.GetQuestion(id);
+			QuestionViewModel questionViewModel = _questionService.GetQuestion(id);
 			if (questionViewModel == null)
 			{
 				return HttpNotFound();
@@ -92,7 +93,7 @@ namespace FilRouge.Web.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			QuestionViewModel questionViewModel = _quizzService.GetQuestion(id);
+			QuestionViewModel questionViewModel = _questionService.GetQuestion(id);
 			if (questionViewModel == null)
 			{
 				return HttpNotFound();
@@ -113,7 +114,7 @@ namespace FilRouge.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_quizzService.EditQuestion(questionViewModel);
+				_questionService.EditQuestion(questionViewModel);
 				return RedirectToAction("Index");
 			}
 			var technologiesListItem = _referencesService.GetListItemsTechnologies();
