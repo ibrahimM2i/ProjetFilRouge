@@ -142,13 +142,13 @@ namespace FilRouge.Web.Services
             try
             {
                 Contact creatingQuizzContact = db.Contact.Single(e => e.UserId == userid);
-                DifficultyMaster difficultyQuizz = db.DifficultyMasters.Single(e => e.DiffMasterId == difficultymasterid);
+                Difficulty difficultyQuizz = db.Difficulties.Single(e => e.DifficultyId == difficultymasterid);
                 Technology technoQuizz = db.Technologies.Single(e => e.TechnoId == technoid);
                 
                 Quizz unQuizz = new Quizz
                 {
                     ContactId = userid,
-                    DifficultyMasterId = difficultymasterid,
+                    DifficultyId = difficultymasterid,
                     TechnologyId = technoid,
                     Timer = timer,
                     PrenomUser = prenomuser,
@@ -157,7 +157,7 @@ namespace FilRouge.Web.Services
                     EtatQuizz = 0,
                     QuestionLibre = questionlibre,
                     Contact = creatingQuizzContact,
-                    DifficultyMaster = difficultyQuizz,
+                    Difficulty = difficultyQuizz,
                     Questions = questionsQuizz,
                     Technology = technoQuizz
                 };

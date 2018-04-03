@@ -24,7 +24,6 @@ namespace FilRouge.Web.Entities
 
 
         public DbSet<Contact> Contact { get; set; }
-        public DbSet<DifficultyMaster> DifficultyMasters { get; set; }
         public DbSet<Difficulty> Difficulties { get; set; }
         public DbSet<DifficultyRate> DifficultyRates { get; set; }
         public DbSet<Questions> Questions { get; set; }

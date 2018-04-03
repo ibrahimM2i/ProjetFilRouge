@@ -22,8 +22,8 @@ namespace FilRouge.Web.Entities
         public bool QuestionLibre { get; set; } //true oui et false pour non
         public int NombreQuestion { get; set; } //nombre de questions à intégrer au quizz
         //Clés étrangères
-        [ForeignKey("DifficultyMaster")]
-        public int DifficultyMasterId { get; set; }
+        [ForeignKey("Difficulty")]
+        public int DifficultyId { get; set; }
         [ForeignKey("Technology")]
         public int TechnologyId {get; set;}
         [ForeignKey("Contact")]
@@ -31,7 +31,7 @@ namespace FilRouge.Web.Entities
         #endregion
         #region Association
 
-        public virtual DifficultyMaster DifficultyMaster { get; set; }
+        public virtual Difficulty Difficulty { get; set; }
         public virtual Technology Technology { get; set; }
         public virtual Contact Contact { get; set; }
         public virtual List<Questions> Questions { get; set; }

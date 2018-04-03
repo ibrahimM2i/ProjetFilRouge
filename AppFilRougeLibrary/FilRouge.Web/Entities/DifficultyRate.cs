@@ -26,7 +26,7 @@ namespace FilRouge.Web.Entities
 
         #region Associations
         public virtual Difficulty Difficulty { get; set; }
-        public virtual  DifficultyMaster DifficultyMaster { get; set; }
+        public virtual Difficulty DifficultyMaster { get; set; }
         #endregion
     }
 }
