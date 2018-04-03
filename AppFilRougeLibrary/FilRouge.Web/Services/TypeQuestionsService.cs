@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace FilRouge.Web.Services
 {
@@ -83,6 +84,32 @@ namespace FilRouge.Web.Services
 				dbContext.SaveChanges();
 			}
 
+		}
+
+		/// <summary>
+		/// Retourne une liste d'item pour les types de question
+		/// pour le viewbag
+		/// </summary>
+		/// <returns></returns>
+		public List<SelectListItem> GetListItemQuestionType()
+		{
+			var questionTypeListItem = new List<SelectListItem>();
+
+			using (var dbContext = new FilRougeDBContext())
+			{
+				var typeQuestion = dbContext.TypeQuestion;
+
+				foreach (var type in typeQuestion)
+				{
+					questionTypeListItem.Add(new SelectListItem()
+					{
+						Text = type.NameType,
+						Value = type.TypeQuestionId.ToString()
+
+					});
+				}
+				return questionTypeListItem;
+			}
 		}
 
 	}

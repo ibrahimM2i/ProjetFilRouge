@@ -41,29 +41,6 @@ namespace FilRouge.Web.Services
             return desTechnologies;
         }
 
-	    public List<SelectListItem> GetListItemsTechnologies()
-	    {
-
-		    var technologiesListItem = new List<SelectListItem>();
-
-
-		    using (var dbContext = new FilRougeDBContext())
-		    {
-			    var technologies = dbContext.Technologies;
-
-			    foreach (var technology in technologies)
-			    {
-				    technologiesListItem.Add(new SelectListItem()
-				    {
-					    Text = technology.TechnoName,
-					    Value = technology.TechnoId.ToString()
-
-				    });
-			    }
-
-			    return technologiesListItem;
-		    }
-	    }
 
 	    /// <summary>
 		/// Cette méthode permet de récupérer toutes les difficultés
@@ -89,27 +66,33 @@ namespace FilRouge.Web.Services
             return desDifficulties;
         }
 
-	    public List<SelectListItem> GetListItemQuestionType()
-	    {
-			var questionTypeListItem = new List<SelectListItem>();
+		/// <summary>
+		/// Retourne une liste d'item Technologie pour le viewbag
+		/// </summary>
+		/// <returns></returns>
+		public List<SelectListItem> GetListItemsDifficulties()
+		{
+
+			var difficutliesListItem = new List<SelectListItem>();
+
 
 			using (var dbContext = new FilRougeDBContext())
-		    {
-				var typeQuestion = dbContext.TypeQuestion;
+			{
+				var difficutlies = dbContext.Difficulties;
 
-			    foreach (var type in typeQuestion)
-			    {
-				    questionTypeListItem.Add(new SelectListItem()
-				    {
-					    Text = type.NameType,
-					    Value = type.TypeQuestionId.ToString()
+				foreach (var difficulty in difficutlies)
+				{
+					difficutliesListItem.Add(new SelectListItem()
+					{
+						Text = difficulty.DifficultyName,
+						Value = difficulty.DifficultyId.ToString()
 
-				    });
-			    }
-			    return questionTypeListItem;
-		    }
+					});
+				}
+
+				return difficutliesListItem;
+			}
 		}
-
 		#endregion
 	}
 }
