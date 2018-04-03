@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FilRouge.Web.Entities;
 
 namespace FilRouge.Web.ViewModels.Maps
 {
-	public class Map
+	public static class  Map
 	{
+
 	}
 }
