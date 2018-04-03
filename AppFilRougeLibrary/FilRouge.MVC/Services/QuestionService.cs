@@ -12,6 +12,10 @@ namespace FilRouge.MVC.Services
 	public class QuestionService
 	{
 		private ReferencesService _referencesService = new ReferencesService();
+		private readonly DifficultyServices _difficultyServices = new DifficultyServices();
+		private readonly TechnologiesService _technologiesService = new TechnologiesService();
+		private readonly TypeQuestionsService _typeQuestionsService = new TypeQuestionsService();
+
 		#region CRUD Question 
 		/// <summary>
 		/// Ajouter une question dans la BDD
@@ -24,10 +28,6 @@ namespace FilRouge.MVC.Services
 			using (var dbContext = new FilRougeDBContext())
 			{
 				var question = questionsViewModel.MapToQuestion();
-
-				var technologiesListItem = _referencesService.GetListItemsTechnologies();
-				var difficultiesListItem = _referencesService.GetTechnologies();
-
 
 				dbContext.Questions.Add(question);
 				dbContext.SaveChanges();
@@ -53,6 +53,11 @@ namespace FilRouge.MVC.Services
 			return question.MapToQuestionsViewModel();
 		}
 
+		/// <summary>
+		/// Edition d'une question 
+		/// </summary>
+		/// <param name="questionViewModel"></param>
+		/// <returns></returns>
 		public int EditQuestion(QuestionViewModel questionViewModel)
 		{
 			var id = 0;
@@ -74,6 +79,10 @@ namespace FilRouge.MVC.Services
 
 			return id;
 		}
+		/// <summary>
+		/// Retourne la list des questions
+		/// </summary>
+		/// <returns></returns>
 		public List<QuestionViewModel> GetAllQuestions()
 		{
 			var questionViewModels = new List<QuestionViewModel>();
@@ -84,11 +93,6 @@ namespace FilRouge.MVC.Services
 				{
 					questionViewModels.Add(question.MapToQuestionsViewModel());
 				}
-
-				// ********* version fluente *****//////
-				//var AttendanceEntities = dbContext.Attendance.ToList();
-				//studentAttendanceViewModels.Add
-				//studentAttendanceViewModels.AddRange(AttendanceEntities.Select(Attendance.AttendanceEntities()));
 			}
 
 			return questionViewModels;
