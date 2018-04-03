@@ -6,10 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using FilRouge.Web.Entities;
-using FilRouge.Web.Services;
+using FilRouge.MVC.Entities;
+using FilRouge.MVC.Services;
 
-namespace FilRouge.Web.Controllers
+namespace FilRouge.MVC.Controllers
 {
     public class DifficultyRatesController : Controller
     {

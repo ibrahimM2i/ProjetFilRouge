@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilRouge.Web", "FilRouge.Web\FilRouge.Web.csproj", "{1469822A-5373-42CD-A605-D0A6B4201E74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilRouge.MVC", "FilRouge.MVC\FilRouge.MVC.csproj", "{5D7FFCA9-9981-4A23-94BB-D925C8F1D266}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1469822A-5373-42CD-A605-D0A6B4201E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1469822A-5373-42CD-A605-D0A6B4201E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1469822A-5373-42CD-A605-D0A6B4201E74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D7FFCA9-9981-4A23-94BB-D925C8F1D266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D7FFCA9-9981-4A23-94BB-D925C8F1D266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D7FFCA9-9981-4A23-94BB-D925C8F1D266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D7FFCA9-9981-4A23-94BB-D925C8F1D266}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

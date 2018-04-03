@@ -1,0 +1,17 @@
+﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<
+<h2>Details question</h2>
+@Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    @Html.DisplayFor(m => m)
+
+    @Html.ActionLink("Back to List", "Questions")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId })
+
+}
