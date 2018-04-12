@@ -66,33 +66,6 @@ namespace FilRouge.MVC.Services
             return desDifficulties;
         }
 
-		/// <summary>
-		/// Retourne une liste d'item Technologie pour le viewbag
-		/// </summary>
-		/// <returns></returns>
-		public List<SelectListItem> GetListItemsDifficulties()
-		{
-
-			var difficutliesListItem = new List<SelectListItem>();
-
-
-			using (var dbContext = new FilRougeDBContext())
-			{
-				var difficutlies = dbContext.Difficulties;
-
-				foreach (var difficulty in difficutlies)
-				{
-					difficutliesListItem.Add(new SelectListItem()
-					{
-						Text = difficulty.DifficultyName,
-						Value = difficulty.DifficultyId.ToString()
-
-					});
-				}
-
-				return difficutliesListItem;
-			}
-		}
 		#endregion
 	}
 }

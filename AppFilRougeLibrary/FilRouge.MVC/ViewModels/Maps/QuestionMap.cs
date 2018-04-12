@@ -54,7 +54,7 @@ namespace FilRouge.MVC.ViewModels.Maps
 				TechnologyId = questionsViewModel.TechnologyId,
 				QuestionTypeId = questionsViewModel.QuestionTypeId,
 				DifficultyId = questionsViewModel.DifficultyId
-				//TODO	Rajouter difficultiesID quand pret
+				
 			};
 			return question;
 

@@ -16,6 +16,10 @@ namespace FilRouge.MVC.Controllers
 		private readonly QuizzService _quizzService = new QuizzService();
 		private readonly ReferencesService _referencesService = new ReferencesService();
 		private readonly QuestionService _questionService = new QuestionService();
+		private readonly DifficultyServices _difficultyServices = new DifficultyServices();
+		private readonly TechnologiesService _technologiesService = new TechnologiesService();
+		private readonly TypeQuestionsService _typeQuestionsService = new TypeQuestionsService();
+
 		//private readonly StudentAttendanceService -studentAttendanceService = new StudentAttendanceService();
 		/// <summary>
 		/// Get:  Ajouter une question
@@ -24,15 +28,16 @@ namespace FilRouge.MVC.Controllers
 		[HttpGet]
 		public ActionResult AddQuestion()
 		{
-			var technologiesListItem = _referencesService.GetListItemsTechnologies();
-			var difficultiesListItem = _referencesService.GetListItemQuestionType();
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
+			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
-			ViewBag.QuestionType = difficultiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
+
 			return View(new QuestionViewModel());
 		}
-
-
 
 		/// <summary>
 		/// Post : Ajouter une question
@@ -46,11 +51,13 @@ namespace FilRouge.MVC.Controllers
 				_questionService.AddQuestion(questionViewModel);
 				return RedirectToAction("Index", "Home");
 			}
-			var technologiesListItem = _referencesService.GetListItemsTechnologies();
-			var difficultiesListItem = _referencesService.GetListItemQuestionType();
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
+			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
-			ViewBag.QuestionType = difficultiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
 
 			return View(questionViewModel);
 		}
@@ -61,6 +68,8 @@ namespace FilRouge.MVC.Controllers
 
 			return View("Questions", questions);
 		}
+		//TODO changer le ViewBag.DifficultyId quand dispo dans Difficulty services 
+		private FilRougeDBContext db = new FilRougeDBContext();
 
 		public ActionResult Details(int? id)
 		{
@@ -73,11 +82,13 @@ namespace FilRouge.MVC.Controllers
 			{
 				return HttpNotFound();
 			}
-			var technologiesListItem = _referencesService.GetListItemsTechnologies();
-			var difficultiesListItem = _referencesService.GetListItemQuestionType();
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
+			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
-			ViewBag.QuestionType = difficultiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
 
 			return View(questionViewModel);
 		}
@@ -98,11 +109,13 @@ namespace FilRouge.MVC.Controllers
 			{
 				return HttpNotFound();
 			}
-			var technologiesListItem = _referencesService.GetListItemsTechnologies();
-			var difficultiesListItem = _referencesService.GetListItemQuestionType();
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
+			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
-			ViewBag.QuestionType = difficultiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
 
 			return View(questionViewModel);
 		}
@@ -110,18 +123,20 @@ namespace FilRouge.MVC.Controllers
 		// POST: Questions/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit( QuestionViewModel questionViewModel)
+		public ActionResult Edit(QuestionViewModel questionViewModel)
 		{
 			if (ModelState.IsValid)
 			{
 				_questionService.EditQuestion(questionViewModel);
-				return RedirectToAction("Index");
+				return RedirectToAction("Questions");
 			}
-			var technologiesListItem = _referencesService.GetListItemsTechnologies();
-			var difficultiesListItem = _referencesService.GetListItemQuestionType();
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
+			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
-			ViewBag.QuestionType = difficultiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
 
 			return View(questionViewModel);
 		}

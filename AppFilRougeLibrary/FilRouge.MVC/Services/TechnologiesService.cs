@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using FilRouge.MVC.Entities;
 
 namespace FilRouge.MVC.Services
@@ -86,8 +87,35 @@ namespace FilRouge.MVC.Services
 				dbContext.Technologies.Remove(technologie);
 				dbContext.SaveChanges();
 			}
+		}
 
 
+		/// <summary>
+		/// Retourne une liste d'item Technologie pour le viewbag
+		/// </summary>
+		/// <returns></returns>
+		public List<SelectListItem> GetListItemsTechnologies()
+		{
+
+			var technologiesListItem = new List<SelectListItem>();
+
+
+			using (var dbContext = new FilRougeDBContext())
+			{
+				var technologies = dbContext.Technologies;
+
+				foreach (var technology in technologies)
+				{
+					technologiesListItem.Add(new SelectListItem()
+					{
+						Text = technology.TechnoName,
+						Value = technology.TechnoId.ToString()
+
+					});
+				}
+
+				return technologiesListItem;
+			}
 		}
 	}
 }

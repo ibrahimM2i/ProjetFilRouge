@@ -12,14 +12,19 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
-        @Html.DropDownListFor(m => m.TechnologyId, (List<SelectListItem>)ViewBag.Technologies, "Selectionner une Technologie")
-        @Html.ValidationMessageFor(m => m.TechnologyId)
-    </div>
-    <div class="col-md-4">
-        @Html.DropDownListFor(m => m.QuestionTypeId, (List<SelectListItem>)ViewBag.QuestionType, "Selectionner un type de Question")
-        @Html.ValidationMessageFor(m => m.QuestionTypeId)
-    </div>
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.TechnologyId, (List<SelectListItem>)ViewBag.Technologies, "Selectionner une Technologie")
+		@Html.ValidationMessageFor(m => m.TechnologyId)
+	</div>
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.DifficultyId, (List<SelectListItem>)ViewBag.Difficulties, "Selectionner une difficulté")
+		@Html.ValidationMessageFor(m => m.DifficultyId)
+	</div>
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.QuestionTypeId, (List<SelectListItem>)ViewBag.QuestionType, "Selectionner un type de Question")
+		@Html.ValidationMessageFor(m => m.QuestionTypeId)
+	</div>
+
 </div>
 <div class="row">
     <div class="row">
