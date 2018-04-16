@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using FilRouge.MVC.Entities;
 using FilRouge.MVC.ViewModels;
 using FilRouge.MVC.ViewModels.Maps;
@@ -60,11 +61,40 @@ namespace FilRouge.MVC.Services
                 var difficulty = dbContext.Difficulties.Find(difficultyViewModel.DifficultyId);
                 difficulty.DifficultyId = difficultyViewModel.DifficultyId;
                 difficulty.DifficultyName = difficultyViewModel.DifficultyName;
+
                 dbContext.Entry(difficulty).State = EntityState.Modified;
                 dbContext.SaveChanges();
                 id = difficulty.DifficultyId;
             }
             return id;
         }
-    }
+
+		/// <summary>
+		/// Retourne une liste d'item Technologie pour le viewbag
+		/// </summary>
+		/// <returns></returns>
+		public List<SelectListItem> GetListItemsDifficulties()
+		{
+
+			var difficutliesListItem = new List<SelectListItem>();
+
+
+			using (var dbContext = new FilRougeDBContext())
+			{
+				var difficutlies = dbContext.Difficulties;
+
+				foreach (var difficulty in difficutlies)
+				{
+					difficutliesListItem.Add(new SelectListItem()
+					{
+						Text = difficulty.DifficultyName,
+						Value = difficulty.DifficultyId.ToString()
+
+					});
+				}
+
+				return difficutliesListItem;
+			}
+		}
+	}
 }
