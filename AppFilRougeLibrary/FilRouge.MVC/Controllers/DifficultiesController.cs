@@ -11,11 +11,13 @@ using FilRouge.MVC.Services;
 
 namespace FilRouge.MVC.Controllers
 {
+    [Authorize]
     public class DifficultiesController : Controller
     {
         private DifficultyServices _difficultyServices = new DifficultyServices();
 
         // GET: Difficulties
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var difficulty = _difficultyServices.GetAllDifficulties();

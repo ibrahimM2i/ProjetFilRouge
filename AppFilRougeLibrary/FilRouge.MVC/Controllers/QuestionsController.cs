@@ -16,6 +16,9 @@ namespace FilRouge.MVC.Controllers
 		private readonly QuizzService _quizzService = new QuizzService();
 		private readonly ReferencesService _referencesService = new ReferencesService();
 		private readonly QuestionService _questionService = new QuestionService();
+        private readonly DifficultyServices _difficultyService = new DifficultyServices();
+        private readonly TechnologiesService _technologiesService = new TechnologiesService();
+        private readonly TypeQuestionsService _questionTypeService = new TypeQuestionsService();
 		//private readonly StudentAttendanceService -studentAttendanceService = new StudentAttendanceService();
 		/// <summary>
 		/// Get:  Ajouter une question
@@ -24,9 +27,9 @@ namespace FilRouge.MVC.Controllers
 		[HttpGet]
 		public ActionResult AddQuestion()
 		{
-            var technologiesListItem = _referencesService.GetListItemTechnologies();
-            var questionTypeListItem = _referencesService.GetListItemQuestionType();
-            var difficultiesListItem = _referencesService.GetListItemsDifficulties();
+            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
+            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
 
             ViewBag.Difficulties = difficultiesListItem;
             ViewBag.Technologies = technologiesListItem;
@@ -48,9 +51,9 @@ namespace FilRouge.MVC.Controllers
 				_questionService.AddQuestion(questionViewModel);
 				return RedirectToAction("Questions");
 			}
-			var technologiesListItem = _referencesService.GetListItemTechnologies();
-			var questionTypeListItem = _referencesService.GetListItemQuestionType();
-            var difficultiesListItem = _referencesService.GetListItemsDifficulties();
+            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
+            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
 
             ViewBag.Difficulties = difficultiesListItem;
             ViewBag.Technologies = technologiesListItem;
@@ -78,9 +81,9 @@ namespace FilRouge.MVC.Controllers
 				return HttpNotFound();
 			}
 
-            var technologiesListItem = _referencesService.GetListItemTechnologies();
-            var questionTypeListItem = _referencesService.GetListItemQuestionType();
-            var difficultiesListItem = _referencesService.GetListItemsDifficulties();
+            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
+            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
 
             ViewBag.Difficulties = difficultiesListItem;
             ViewBag.Technologies = technologiesListItem;
@@ -106,9 +109,9 @@ namespace FilRouge.MVC.Controllers
 				return HttpNotFound();
 			}
 
-            var technologiesListItem = _referencesService.GetListItemTechnologies();
-            var questionTypeListItem = _referencesService.GetListItemQuestionType();
-            var difficultiesListItem = _referencesService.GetListItemsDifficulties();
+            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
+            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
 
             ViewBag.Difficulties = difficultiesListItem;
             ViewBag.Technologies = technologiesListItem;
@@ -128,9 +131,9 @@ namespace FilRouge.MVC.Controllers
 				return RedirectToAction("Index");
 			}
 
-            var technologiesListItem = _referencesService.GetListItemTechnologies();
-            var questionTypeListItem = _referencesService.GetListItemQuestionType();
-            var difficultiesListItem = _referencesService.GetListItemsDifficulties();
+            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
+            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
 
             ViewBag.Difficulties = difficultiesListItem;
             ViewBag.Technologies = technologiesListItem;
