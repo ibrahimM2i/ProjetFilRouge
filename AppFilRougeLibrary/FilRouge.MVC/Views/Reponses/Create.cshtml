@@ -1,1 +1,49 @@
-﻿
+﻿@model FilRouge.Web.ViewModels.ReponseViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Ajout des réponses pour la question</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Question id = @ViewBag.Question.QuestionId</div>
+    <div class="panel-body">
+        @ViewBag.Question.Content
+        <br />
+        <small>@ViewBag.Question.Commentaire</small>
+    </div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    for (int i = 1; i <= 4; i++)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">Choix @i</div><br />
+            <div style="padding:15px;">
+                @Html.Label("Réponse " + i, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBox("Reponse" + i, "", htmlAttributes: new { @class = "control-label" })
+
+                <br />
+                @Html.Label("Bonne réponse? ", htmlAttributes: new { @class = "control-label" })
+                @Html.CheckBox("BonneReponse" + i)
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Créer les réponses" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

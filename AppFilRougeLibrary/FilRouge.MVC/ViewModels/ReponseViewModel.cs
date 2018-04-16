@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace FilRouge.MVC.ViewModels
+namespace FilRouge.Web.ViewModels
 {
-	public class ReponseViewModel
-	{
-	}
+    public class ReponseViewModel
+    {
+        public int ReponseId { get; set; }
+
+        [Display(Name = "Valeur réponse")]
+        public string Content { get; set; }
+
+        [Display(Name = "Bonne réponse?")]
+        public bool TrueReponse { get; set; }
+
+        //public int QuestionId { get; set; }
+    }
 }
