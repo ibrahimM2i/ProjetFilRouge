@@ -1,9 +1,7 @@
 namespace FilRouge.MVC.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     internal sealed class Configuration : DbMigrationsConfiguration<FilRouge.MVC.Entities.FilRougeDBContext>
     {
@@ -18,6 +16,9 @@ namespace FilRouge.MVC.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Admin" });
+            context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Agent" });
         }
     }
 }

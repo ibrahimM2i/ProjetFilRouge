@@ -12,12 +12,14 @@ using FilRouge.MVC.ViewModels.Maps;
 
 namespace FilRouge.MVC.Controllers
 {
+    [Authorize]
     public class DifficultyRatesController : Controller
     {
         private FilRougeDBContext db = new FilRougeDBContext();
         private readonly DifficultyRatesServices _difficultyRatesServices = new DifficultyRatesServices();
 
         // GET: DifficultyRates
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var difficultyRates = _difficultyRatesServices.GetAllDifficultyRates();

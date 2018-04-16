@@ -10,11 +10,13 @@ using FilRouge.MVC.Entities;
 
 namespace FilRouge.MVC.ViewModels
 {
+    [Authorize]
     public class TypeQuestionsController : Controller
     {
         private FilRougeDBContext db = new FilRougeDBContext();
 
         // GET: TypeQuestions
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.TypeQuestion.ToList());

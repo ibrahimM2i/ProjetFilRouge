@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using FilRouge.MVC.Services;
 using FilRouge.MVC.ViewModels;
 
 namespace FilRouge.MVC.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
         private ContactService _contactService = new ContactService();
@@ -18,6 +15,7 @@ namespace FilRouge.MVC.Controllers
             return View(contacts);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View(new ContactViewModel());
@@ -34,6 +32,7 @@ namespace FilRouge.MVC.Controllers
             return View(contactViewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             ContactViewModel contactViewModel = _contactService.GetContactById(id);

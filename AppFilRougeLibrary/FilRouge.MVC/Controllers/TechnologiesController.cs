@@ -11,11 +11,12 @@ using FilRouge.MVC.Services;
 
 namespace FilRouge.MVC.Controllers
 {
+    [Authorize]
 	public class TechnologiesController : Controller
 	{
-
 		private TechnologiesService _technologies = new TechnologiesService();
 
+        [AllowAnonymous]
 		// GET: Technologies
 		public ActionResult Index()
 		{
