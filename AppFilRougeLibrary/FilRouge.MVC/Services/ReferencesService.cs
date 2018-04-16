@@ -78,9 +78,9 @@ namespace FilRouge.MVC.Services
 
 			using (var dbContext = new FilRougeDBContext())
 			{
-				var difficutlies = dbContext.Difficulties;
+				var difficulties = dbContext.Difficulties;
 
-				foreach (var difficulty in difficutlies)
+				foreach (var difficulty in difficulties)
 				{
 					difficutliesListItem.Add(new SelectListItem()
 					{
@@ -93,6 +93,48 @@ namespace FilRouge.MVC.Services
 				return difficutliesListItem;
 			}
 		}
+
+        public List<SelectListItem> GetListItemTechnologies()
+        {
+            var technologiesListItem = new List<SelectListItem>();
+
+            using (var dbContext = new FilRougeDBContext())
+            {
+                var technologies = dbContext.Technologies;
+
+                foreach(var technology in technologies)
+                {
+                    technologiesListItem.Add(new SelectListItem()
+                    {
+                        Text = technology.TechnoName,
+                        Value = technology.TechnoId.ToString()
+                    });
+                }
+            }
+
+            return technologiesListItem;
+        }
+
+        public List<SelectListItem> GetListItemQuestionType()
+        {
+            var questionTypeListItem = new List<SelectListItem>();
+
+            using (var dbContext = new FilRougeDBContext())
+            {
+                var questionType = dbContext.TypeQuestion;
+
+                foreach(var item in questionType)
+                {
+                    questionTypeListItem.Add(new SelectListItem()
+                    {
+                        Text = item.NameType,
+                        Value = item.TypeQuestionId.ToString()
+                    });
+                }
+            }
+
+            return questionTypeListItem;
+        }
 		#endregion
 	}
 }

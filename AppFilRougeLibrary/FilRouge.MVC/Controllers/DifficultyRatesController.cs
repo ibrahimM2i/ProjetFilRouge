@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using FilRouge.MVC.Entities;
 using FilRouge.MVC.Services;
+using FilRouge.MVC.ViewModels.Maps;
 
 namespace FilRouge.MVC.Controllers
 {
@@ -49,7 +50,7 @@ namespace FilRouge.MVC.Controllers
             {
                 db.DifficultyRates.Add(difficultyRate);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("DifficultyRates");
             }
 
             ViewBag.DifficultyId = new SelectList(db.Difficulties, "DifficultyId", "DifficultyName", difficultyRate.DifficultyId);
@@ -57,21 +58,18 @@ namespace FilRouge.MVC.Controllers
             return View(difficultyRate);
         }
 
-        // GET: DifficultyRates/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: DifficultyRates/Edit/2?idMaster=1
+        public ActionResult Edit(int idMaster, int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DifficultyRate difficultyRate = db.DifficultyRates.Find(id);
+            DifficultyRate difficultyRate = db.DifficultyRates.Find(idMaster, id);
             if (difficultyRate == null)
             {
                 return HttpNotFound();
             }
             ViewBag.DifficultyId = new SelectList(db.Difficulties, "DifficultyId", "DifficultyName", difficultyRate.DifficultyId);
             ViewBag.DifficultyMasterId = new SelectList(db.Difficulties, "DifficultyId", "DifficultyName", difficultyRate.DifficultyMasterId);
-            return View(difficultyRate);
+            var difficultyViewModel = difficultyRate.MapToDifficultyRateViewModel();
+            return View(difficultyViewModel);
         }
 
         // POST: DifficultyRates/Edit/5
