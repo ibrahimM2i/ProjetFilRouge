@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using FilRouge.Web.Services;
-using FilRouge.Web.ViewModels;
+﻿using System.Web.Mvc;
+
 
 namespace FilRouge.Web.Controllers
 {
-    public class ContactController : Controller
+	public class ContactController : Controller
     {
-        private ContactService _contactService = new ContactService();
+        private Contact _contactService = new ContactService();
         // GET: Contact
         public ActionResult Index()
         {

@@ -98,6 +98,18 @@ namespace FilRouge.MVC.Services
 			return questionViewModels;
 		}
 
+		public int AddReponsesToQuestion(int id ,List<Reponses> reponses)
+		{
+			using (var db = new FilRougeDBContext())
+			{
+				var questionAddReponse = db.Questions.Find(id);
+
+				questionAddReponse.Reponses = reponses; // ajout de la liste des réponses à la question
+				int nbRes = db.SaveChanges();
+				return nbRes;
+			}
+			
+		}
 		#endregion
 	}
 }

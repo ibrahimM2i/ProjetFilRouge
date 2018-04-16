@@ -16,9 +16,10 @@ namespace FilRouge.MVC.Controllers
 		private readonly QuizzService _quizzService = new QuizzService();
 		private readonly ReferencesService _referencesService = new ReferencesService();
 		private readonly QuestionService _questionService = new QuestionService();
-        private readonly DifficultyServices _difficultyService = new DifficultyServices();
-        private readonly TechnologiesService _technologiesService = new TechnologiesService();
-        private readonly TypeQuestionsService _questionTypeService = new TypeQuestionsService();
+		private readonly DifficultyServices _difficultyServices = new DifficultyServices();
+		private readonly TechnologiesService _technologiesService = new TechnologiesService();
+		private readonly TypeQuestionsService _typeQuestionsService = new TypeQuestionsService();
+
 		//private readonly StudentAttendanceService -studentAttendanceService = new StudentAttendanceService();
 		/// <summary>
 		/// Get:  Ajouter une question
@@ -27,17 +28,17 @@ namespace FilRouge.MVC.Controllers
 		[HttpGet]
 		public ActionResult AddQuestion()
 		{
-            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
-            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
-            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
-            ViewBag.Difficulties = difficultiesListItem;
-            ViewBag.Technologies = technologiesListItem;
-            ViewBag.QuestionType = questionTypeListItem;
-            return View(new QuestionViewModel());
+			ViewBag.Difficulties = difficultiesListItem;
+			ViewBag.Technologies = technologiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
+
+
+			return View(new QuestionViewModel());
 		}
-
-
 
 		/// <summary>
 		/// Post : Ajouter une question
@@ -46,18 +47,33 @@ namespace FilRouge.MVC.Controllers
 		[HttpPost]
 		public ActionResult AddQuestion(QuestionViewModel questionViewModel)
 		{
+			var Id = 0;
 			if (ModelState.IsValid)
 			{
-				_questionService.AddQuestion(questionViewModel);
-				return RedirectToAction("Questions");
+				Id = _questionService.AddQuestion(questionViewModel);
+				//return RedirectToAction("Index", "Home");
 			}
-            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
-            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
-            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
-            ViewBag.Difficulties = difficultiesListItem;
-            ViewBag.Technologies = technologiesListItem;
-			ViewBag.QuestionType = questionTypeListItem;
+			ViewBag.Difficulties = difficultiesListItem;
+			ViewBag.Technologies = technologiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
+
+			var typeQuestion = _typeQuestionsService.GetTypeQuestion(questionViewModel.QuestionTypeId);
+			if (typeQuestion != null)
+			{
+				if (typeQuestion.NameType.ToLower() != "choix libre")
+				{
+					return RedirectToRoute("ReponsesCreate", new { id = Id });
+				}
+				else
+				{
+					return RedirectToAction("Details", new { id = Id });
+				}
+				
+			}
 
 			return View(questionViewModel);
 		}
@@ -68,7 +84,9 @@ namespace FilRouge.MVC.Controllers
 
 			return View("Questions", questions);
 		}
-
+		//TODO changer le ViewBag.DifficultyId quand dispo dans Difficulty services 
+		private FilRougeDBContext db = new FilRougeDBContext();
+	
 		public ActionResult Details(int? id)
 		{
 			if (id == null)
@@ -80,16 +98,15 @@ namespace FilRouge.MVC.Controllers
 			{
 				return HttpNotFound();
 			}
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
-            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
-            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
-            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
+			ViewBag.Difficulties = difficultiesListItem;
+			ViewBag.Technologies = technologiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
 
-            ViewBag.Difficulties = difficultiesListItem;
-            ViewBag.Technologies = technologiesListItem;
-            ViewBag.QuestionType = questionTypeListItem;
-
-            return View(questionViewModel);
+			return View(questionViewModel);
 		}
 		/// <summary>
 		/// Edition d'une question "GET"
@@ -108,38 +125,36 @@ namespace FilRouge.MVC.Controllers
 			{
 				return HttpNotFound();
 			}
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
-            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
-            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
-            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
+			ViewBag.Difficulties = difficultiesListItem;
+			ViewBag.Technologies = technologiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
 
-            ViewBag.Difficulties = difficultiesListItem;
-            ViewBag.Technologies = technologiesListItem;
-            ViewBag.QuestionType = questionTypeListItem;
-
-            return View(questionViewModel);
+			return View(questionViewModel);
 		}
 
 		// POST: Questions/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit( QuestionViewModel questionViewModel)
+		public ActionResult Edit(QuestionViewModel questionViewModel)
 		{
 			if (ModelState.IsValid)
 			{
 				_questionService.EditQuestion(questionViewModel);
-				return RedirectToAction("Index");
+				return RedirectToAction("Questions");
 			}
+			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
+			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
+			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
 
-            var technologiesListItem = _technologiesService.GetListItemsTechnologies();
-            var questionTypeListItem = _questionTypeService.GetListItemQuestionType();
-            var difficultiesListItem = _difficultyService.GetListItemsDifficulties();
+			ViewBag.Difficulties = difficultiesListItem;
+			ViewBag.Technologies = technologiesListItem;
+			ViewBag.QuestionType = typeQuestionsListItem;
 
-            ViewBag.Difficulties = difficultiesListItem;
-            ViewBag.Technologies = technologiesListItem;
-            ViewBag.QuestionType = questionTypeListItem;
-
-            return View(questionViewModel);
+			return View(questionViewModel);
 		}
 	}
 }

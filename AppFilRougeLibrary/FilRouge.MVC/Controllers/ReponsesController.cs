@@ -22,6 +22,7 @@ namespace FilRouge.Web.Controllers
 
         // POST: Reponse/Create/id
         [HttpPost]
+		[Route("Reponses/Create" , Name = "ReponsesCreate")]
         public ActionResult Create(int id, FormCollection collection)
         {
             var question = _questionService.GetQuestion(id).MapToQuestion();
@@ -39,21 +40,27 @@ namespace FilRouge.Web.Controllers
                 reponses.Add(reponse);
             }
 
-            /* /!\ impossible d'utiliser la méthode Edit du serviceQuestion, car le "ViewModel" et le "Mapping" ne prend
+			/* /!\ impossible d'utiliser la méthode Edit du serviceQuestion, car le "ViewModel" et le "Mapping" ne prend
             ** pas en compte la liste des réponses */
-            using (var db = new FilRougeDBContext())
-            {
-                var questionAddReponse = db.Questions.Find(id);
+			//using (var db = new FilRougeDBContext())
+			//{
+			//    var questionAddReponse = db.Questions.Find(id);
 
-                questionAddReponse.Reponses = reponses; // ajout de la liste des réponses à la question
-                int nbRes = db.SaveChanges();
-                if (nbRes > 0)
-                {
-                    return RedirectToAction("Questions", "Questions");
-                }
-            }
+			//    questionAddReponse.Reponses = reponses; // ajout de la liste des réponses à la question
+			//    int nbRes = db.SaveChanges();
+			//    if (nbRes > 0)
+			//    {
+			//        return RedirectToAction("Questions", "Questions");
+			//    }
+			//}
 
-            return View();
+			var nbRes = _questionService.AddReponsesToQuestion(id, reponses);
+			if (nbRes > 0)
+			{
+				return RedirectToAction("Questions", "Questions");
+			}
+
+			return View();
         }
 
     }
