@@ -3,29 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity;
 
 namespace FilRouge.MVC.ViewModels
 {
     public class ContactViewModel
     {
-        public int UserId { get; set; }
+        public string Id { get; set; }
 
         [Required]
-        [Display(Name = "Nom")]
-        public string Name { get; set; }
-
-        [Display(Name = "Prénom")]
-        public string Prenom { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Adresse email")]
+        public string UserName { get; set; }
 
         [Display(Name = "Téléphone")]
-        public string Tel { get; set; }
+        public string PhoneNumber { get; set; }
 
-        [Required]
-        [Display(Name = "Adresse email")]
+        //[Required]
+        [Display(Name = "Adresse d'utilisateur")]
         public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "Type (Role)")]
-        public string Type { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Mot de passe")]
+        public string Password { get; set; }
+
+        /*[Display(Name = "Roles")]
+        public List<string> SesRoles { get; set; }*/
+
+        [Display(Name = "Nom du Role")]
+        public string RoleName { get; set; }
+
+        [Display(Name = "Ancien Role")]
+        public string OldRoleName { get; set; }
+
+        [Display(Name = "Nom d'utilisateur")]
+        public string Name { get; set; }
     }
 }

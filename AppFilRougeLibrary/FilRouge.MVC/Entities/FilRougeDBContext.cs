@@ -13,18 +13,18 @@ using FilRouge.MVC.Models;
 
 namespace FilRouge.MVC.Entities
 {
-    public class FilRougeDBContext : IdentityDbContext<ApplicationUser>
+    public class FilRougeDBContext : IdentityDbContext<Contact>
     {
         
         public FilRougeDBContext() : base("BDDAppliFilRouge")
         {
            //Database.SetInitializer(new DropCreateDatabaseAlways<FilRougeDBContext>()); //Pour la création de la base
-           Database.SetInitializer(new MigrateDatabaseToLatestVersion<FilRougeDBContext, Migrations.Configuration>()); //Pour la migration
+           //Database.SetInitializer(new MigrateDatabaseToLatestVersion<FilRougeDBContext, Migrations.Configuration>()); //Pour la migration
         }
         //Documentation http://www.entityframeworktutorial.net/code-first/code-based-migration-in-code-first.aspx
 
 
-        public DbSet<Contact> Contact { get; set; }
+        //public DbSet<Contact> Contact { get; set; }
         public DbSet<Difficulty> Difficulties { get; set; }
         public DbSet<DifficultyRate> DifficultyRates { get; set; }
         public DbSet<Questions> Questions { get; set; }

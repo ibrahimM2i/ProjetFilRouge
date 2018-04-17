@@ -16,6 +16,7 @@ namespace FilRouge.MVC.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+           
 
             context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Admin" });
             context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Agent" });

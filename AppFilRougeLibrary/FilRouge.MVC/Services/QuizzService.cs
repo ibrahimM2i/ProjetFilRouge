@@ -139,7 +139,7 @@ namespace FilRouge.MVC.Services
             List<Questions> questionsQuizz = AddQuestionToQuizz(questionlibre, nombrequestions, technoid, difficultymasterid);
             int timer = 0;
             FilRougeDBContext db = new FilRougeDBContext();
-            try
+           /* try
             {
                 Contact creatingQuizzContact = db.Contact.Single(e => e.UserId == userid);
                 Difficulty difficultyQuizz = db.Difficulties.Single(e => e.DifficultyId == difficultymasterid);
@@ -178,7 +178,7 @@ namespace FilRouge.MVC.Services
             {
                 Console.WriteLine(e.Message);
                 db.Dispose();
-            }
+            }*/
         }
         #endregion
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using FilRouge.MVC.ViewModels;
 using FilRouge.MVC.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace FilRouge.MVC.ViewModels.Maps
 {
@@ -24,12 +25,15 @@ namespace FilRouge.MVC.ViewModels.Maps
 
             contactViewModel = new ContactViewModel
             {
-                UserId = contact.UserId,
-                Name = contact.Name,
-                Prenom = contact.Prenom,
-                Tel = contact.Tel,
+                Id = contact.Id,
+                UserName = contact.UserName,
                 Email = contact.Email,
-                Type = contact.Type
+                PhoneNumber = contact.PhoneNumber,
+                //SesRoles = contact.Roles.Select(s => s.RoleId).ToList(), //recupere juste les id des roles
+                Password = contact.PasswordHash,
+                Name = contact.Name,
+                RoleName =  contact.Roles.Count>0 ? contact.Roles.First().RoleId : "" //faudra afficher le nom du role
+
             };
             return contactViewModel;
         }
@@ -49,12 +53,13 @@ namespace FilRouge.MVC.ViewModels.Maps
 
             contact = new Contact
             {
-                UserId = contactViewModel.UserId,
-                Name = contactViewModel.Name,
-                Prenom = contactViewModel.Prenom,
-                Tel = contactViewModel.Tel,
+                Id = contactViewModel.Id,
+                UserName = contactViewModel.UserName,
                 Email = contactViewModel.Email,
-                Type = contactViewModel.Type
+                PhoneNumber = contactViewModel.PhoneNumber,
+                Name = contactViewModel.Name,
+                //Roles = contactViewModel.SesRoles //impossible Roles est seulement en lecture....
+                PasswordHash = contactViewModel.Password                
             };
             return contact;
         }
