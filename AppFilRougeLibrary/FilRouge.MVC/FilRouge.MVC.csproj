@@ -213,9 +213,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804031348375_firstMG.cs" />
-    <Compile Include="Migrations\201804031348375_firstMG.Designer.cs">
-      <DependentUpon>201804031348375_firstMG.cs</DependentUpon>
+    <Compile Include="Migrations\201804161245180_contactChangerPourUSer1.cs" />
+    <Compile Include="Migrations\201804161245180_contactChangerPourUSer1.Designer.cs">
+      <DependentUpon>201804161245180_contactChangerPourUSer1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804170717145_contactAddName.cs" />
+    <Compile Include="Migrations\201804170717145_contactAddName.Designer.cs">
+      <DependentUpon>201804170717145_contactAddName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -358,8 +362,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804031348375_firstMG.resx">
-      <DependentUpon>201804031348375_firstMG.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804161245180_contactChangerPourUSer1.resx">
+      <DependentUpon>201804161245180_contactChangerPourUSer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804170717145_contactAddName.resx">
+      <DependentUpon>201804170717145_contactAddName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
