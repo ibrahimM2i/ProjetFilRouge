@@ -22,13 +22,13 @@
             @Html.DisplayNameFor(model => model.Commentaire)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TechnologyId)
+            @Html.DisplayNameFor(model => model.Technology.TechnoName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QuestionTypeId)
+            @Html.DisplayNameFor(model => model.QuestionType.NameType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DifficultyId)
+            @Html.DisplayNameFor(model => model.Difficulty.DifficultyName)
         </th>
     </tr>
 
@@ -45,13 +45,13 @@
             @Html.DisplayFor(modelItem => item.Commentaire)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TechnologyId)
+            @Html.DisplayFor(modelItem => item.Technology.TechnoName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.QuestionTypeId)
+            @Html.DisplayFor(modelItem => item.QuestionType.NameType)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DifficultyId)
+            @Html.DisplayFor(modelItem => item.Difficulty.DifficultyName)
         </td>
         <td>
             @Html.ActionLink("Details", "Details", new { id = item.QuestionId })

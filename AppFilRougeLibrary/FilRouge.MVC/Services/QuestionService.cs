@@ -48,7 +48,10 @@ namespace FilRouge.MVC.Services
 
 			using (var dbContext = new FilRougeDBContext())
 			{
-				question = dbContext.Questions.Find(id);
+				question = dbContext.Questions
+                    .Include("Technology").Include("TypeQuestion").Include("Difficulty")
+                    .Where(q => q.QuestionId == id)
+                    .Select(q => q).First();
 			}
 			return question.MapToQuestionsViewModel();
 		}
@@ -67,9 +70,9 @@ namespace FilRouge.MVC.Services
 				question.Commentaire = questionViewModel.Commentaire;
 				question.Content = questionViewModel.Content;
 				question.Active = questionViewModel.Active;
-				question.DifficultyId = questionViewModel.DifficultyId;
-				question.QuestionTypeId = questionViewModel.QuestionTypeId;
-				question.TechnologyId = questionViewModel.TechnologyId;
+				question.DifficultyId = questionViewModel.Difficulty.DifficultyId;
+                question.QuestionTypeId = questionViewModel.QuestionType.TypeQuestionId;
+				question.TechnologyId = questionViewModel.Technology.TechnoId;
 
 				dbContext.Entry(question).State = EntityState.Modified;
 				dbContext.SaveChanges();
@@ -79,6 +82,7 @@ namespace FilRouge.MVC.Services
 
 			return id;
 		}
+
 		/// <summary>
 		/// Retourne la list des questions
 		/// </summary>

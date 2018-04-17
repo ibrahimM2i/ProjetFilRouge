@@ -106,12 +106,11 @@ namespace FilRouge.MVC.Services
 
 				foreach (var technology in technologies)
 				{
-					technologiesListItem.Add(new SelectListItem()
-					{
-						Text = technology.TechnoName,
-						Value = technology.TechnoId.ToString()
-
-					});
+                    technologiesListItem.Add(new SelectListItem()
+                    {
+                        Text = technology.TechnoName,
+                        Value = technology.TechnoId.ToString()
+                    });
 				}
 
 				return technologiesListItem;

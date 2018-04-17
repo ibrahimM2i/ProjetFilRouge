@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using FilRouge.MVC.Entities;
 using FilRouge.MVC.Services;
 using FilRouge.MVC.ViewModels;
-using FilRouge.MVC.ViewModels.Maps;
 
 namespace FilRouge.MVC.Controllers
 {
-	public class QuestionsController : Controller
+    [Authorize]
+    public class QuestionsController : Controller
 	{
 		private readonly QuizzService _quizzService = new QuizzService();
 		private readonly ReferencesService _referencesService = new ReferencesService();
@@ -61,7 +57,7 @@ namespace FilRouge.MVC.Controllers
 			ViewBag.Technologies = technologiesListItem;
 			ViewBag.QuestionType = typeQuestionsListItem;
 
-			var typeQuestion = _typeQuestionsService.GetTypeQuestion(questionViewModel.QuestionTypeId);
+			var typeQuestion = _typeQuestionsService.GetTypeQuestion(questionViewModel.QuestionType.TypeQuestionId);
 			if (typeQuestion != null)
 			{
 				if (typeQuestion.NameType.ToLower() != "choix libre")
@@ -78,12 +74,14 @@ namespace FilRouge.MVC.Controllers
 			return View(questionViewModel);
 		}
 
+        [AllowAnonymous]
 		public ActionResult Questions()
 		{
 			var questions = _questionService.GetAllQuestions();
 
 			return View("Questions", questions);
 		}
+
 		//TODO changer le ViewBag.DifficultyId quand dispo dans Difficulty services 
 		private FilRougeDBContext db = new FilRougeDBContext();
 	
@@ -98,14 +96,6 @@ namespace FilRouge.MVC.Controllers
 			{
 				return HttpNotFound();
 			}
-			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
-			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
-			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
-
-			ViewBag.Difficulties = difficultiesListItem;
-			ViewBag.Technologies = technologiesListItem;
-			ViewBag.QuestionType = typeQuestionsListItem;
-
 			return View(questionViewModel);
 		}
 		/// <summary>

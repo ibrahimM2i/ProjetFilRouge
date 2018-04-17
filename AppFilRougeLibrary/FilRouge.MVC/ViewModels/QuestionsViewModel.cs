@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using FilRouge.MVC.Entities;
 
 namespace FilRouge.MVC.ViewModels
 {
@@ -16,8 +17,9 @@ namespace FilRouge.MVC.ViewModels
 		public string Commentaire { get; set; }
 		[Display(Name = "Active ? ")]
 		public bool Active { get; set; }
-		public int QuestionTypeId { get; set; }
-		public int TechnologyId { get; set; }
-		public int DifficultyId { get; set; }
+
+		public TypeQuestion QuestionType { get; set; }
+		public Technology Technology { get; set; }
+		public Difficulty Difficulty { get; set; }
 	}
 }

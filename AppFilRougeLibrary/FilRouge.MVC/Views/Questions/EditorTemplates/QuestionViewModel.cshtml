@@ -1,51 +1,38 @@
 ﻿@model FilRouge.MVC.ViewModels.QuestionViewModel
-@{
-    ViewBag.Title = "QuestionsViewModel";
-}
 
 <div class="row">
     <div class="col-md-4">
         @Html.HiddenFor(m => m.QuestionId)
-        <h1> Verification</h1>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        @Html.DropDownListFor(m => m.TechnologyId, (List<SelectListItem>)ViewBag.Technologies, "Selectionnez une Technologie")
-        @Html.ValidationMessageFor(m => m.TechnologyId)
-    </div>
-    <div class="col-md-4">
-        @Html.DropDownListFor(m => m.QuestionTypeId, (List<SelectListItem>)ViewBag.QuestionType, "Selectionnez un type de Question")
-        @Html.ValidationMessageFor(m => m.QuestionTypeId)
-    </div>
-    <div class="col-md-4">
-        @Html.DropDownListFor(m => m.DifficultyId, (List<SelectListItem>)ViewBag.Difficulties, "Selectionnez une difficulté")
-        @Html.ValidationMessageFor(m => m.DifficultyId)
-    </div>
-</div>
-<div class="row">
-    <div class="row">
-        <div class="col-md-4">
-            @Html.LabelFor(m => m.Content)
-            @Html.EditorFor(m => m.Content)
-            @Html.ValidationMessageFor(m => m.Content)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            @Html.LabelFor(m => m.Commentaire)
-            @Html.EditorFor(m => m.Commentaire)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <!--A cacher
-            Selectioner à true si Choix libre
-            Selectioner à false si Choix Multiple / unique
-            a gerer avec JS -->
-            @Html.LabelFor(m => m.Active)
-            @Html.ValidationMessageFor(m => m.Active)
-            @Html.CheckBoxFor(m => m.Active)
-        </div>
-    </div>
-</div>
+<table>
+    <tr>
+        <td>@Html.Label("Technologie : ")</td>
+        <td>@Html.DropDownListFor(m => m.Technology.TechnoId, (List<SelectListItem>)ViewBag.Technologies, "Sélectionnez : ")</td>
+        <td>@Html.ValidationMessageFor(m => m.Technology.TechnoId)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Type de la question : ")</td>
+        <td>@Html.DropDownListFor(m => m.QuestionType.TypeQuestionId, (List<SelectListItem>)ViewBag.QuestionType, "Sélectionnez : ")</td>
+        <td>@Html.ValidationMessageFor(m => m.QuestionType.TypeQuestionId)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Difficulté : ")</td>
+        <td>@Html.DropDownListFor(m => m.Difficulty.DifficultyId, (List<SelectListItem>)ViewBag.Difficulties, "Sélectionnez : ")</td>
+        <td>@Html.ValidationMessageFor(m => m.Difficulty.DifficultyId)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Content)</td>
+        <td>@Html.EditorFor(m => m.Content)</td>
+        <td>@Html.ValidationMessageFor(m => m.Content)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Commentaire)</td>
+        <td>@Html.EditorFor(m => m.Commentaire)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Active)</td>
+        <td>@Html.CheckBoxFor(m => m.Active)</td>
+        <td>@Html.ValidationMessageFor(m => m.Active)</td>
+    </tr>
+</table>

@@ -25,11 +25,10 @@ namespace FilRouge.MVC.ViewModels.Maps
 				Content = question.Content,
 				Commentaire = question.Commentaire,
 				Active = question.Active,
-				QuestionTypeId = question.QuestionTypeId,
-				TechnologyId = question.TechnologyId,
-				DifficultyId = question.DifficultyId
+				QuestionType = question.TypeQuestion,
+				Technology = question.Technology,
+				Difficulty = question.Difficulty
 				//TODO	Rajouter difficultiesID quand pret
-
 			};
 			return questionsViewModel;
 
@@ -51,10 +50,9 @@ namespace FilRouge.MVC.ViewModels.Maps
 				Content = questionsViewModel.Content,
 				Commentaire = questionsViewModel.Commentaire,
 				Active = questionsViewModel.Active,
-				TechnologyId = questionsViewModel.TechnologyId,
-				QuestionTypeId = questionsViewModel.QuestionTypeId,
-				DifficultyId = questionsViewModel.DifficultyId
-				
+				TechnologyId = questionsViewModel.Technology.TechnoId,
+				QuestionTypeId = questionsViewModel.QuestionType.TypeQuestionId,
+				DifficultyId = questionsViewModel.Difficulty.DifficultyId		
 			};
 			return question;
 
