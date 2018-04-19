@@ -31,6 +31,7 @@ namespace FilRouge.MVC.Controllers
         public ActionResult Create()
         {
             ViewBag.Roles = _contactService.GetListItemsRoles();
+            ViewBag.ModeEdition = false;
             return View(new ContactViewModel());
         }
 
@@ -49,8 +50,12 @@ namespace FilRouge.MVC.Controllers
         public ActionResult Edit(string id)
         {
             ContactViewModel contactViewModel = _contactService.GetContactById(id);
-            ViewBag.Roles = _contactService.GetListItemsRoles();
-            contactViewModel.OldRoleName = contactViewModel.RoleName;
+
+            var roles = _contactService.GetListItemsRoles();
+            contactViewModel.OldRoleId = contactViewModel.RoleId;
+
+            ViewBag.Roles = roles;
+            ViewBag.ModeEdition = true;
             return View(contactViewModel);
         }
 
