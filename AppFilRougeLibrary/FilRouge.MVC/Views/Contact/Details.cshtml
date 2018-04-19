@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Information du contact @Model.UserName</h4>
+    <h4>Information du contact @Model.Name</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -41,6 +41,15 @@
         <dd>
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoleName)
+        </dd>
+
 
     </dl>
 </div>

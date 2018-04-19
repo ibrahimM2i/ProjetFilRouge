@@ -23,6 +23,7 @@ namespace FilRouge.MVC.ViewModels
         [Display(Name = "Adresse d'utilisateur")]
         public string Email { get; set; }
 
+        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
         public string Password { get; set; }
@@ -30,13 +31,20 @@ namespace FilRouge.MVC.ViewModels
         /*[Display(Name = "Roles")]
         public List<string> SesRoles { get; set; }*/
 
+        [Required]
         [Display(Name = "Nom du Role")]
-        public string RoleName { get; set; }
+        public string RoleId { get; set; }
 
         [Display(Name = "Ancien Role")]
-        public string OldRoleName { get; set; }
+        public string OldRoleId { get; set; }
+
+        [Display(Name = "Ancien Mot de passe")]
+        public string OldPassword { get; set; }
 
         [Display(Name = "Nom d'utilisateur")]
         public string Name { get; set; }
+
+        [Display(Name = "Role")]
+        public string RoleName { get; set; }
     }
 }

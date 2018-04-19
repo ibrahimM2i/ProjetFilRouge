@@ -32,7 +32,7 @@ namespace FilRouge.MVC.ViewModels.Maps
                 //SesRoles = contact.Roles.Select(s => s.RoleId).ToList(), //recupere juste les id des roles
                 Password = contact.PasswordHash,
                 Name = contact.Name,
-                RoleName =  contact.Roles.Count>0 ? contact.Roles.First().RoleId : "" //faudra afficher le nom du role
+                RoleId = contact.Roles.Count > 0 ? contact.Roles.First().RoleId : "", //faudra afficher le nom du role
 
             };
             return contactViewModel;
@@ -59,7 +59,7 @@ namespace FilRouge.MVC.ViewModels.Maps
                 PhoneNumber = contactViewModel.PhoneNumber,
                 Name = contactViewModel.Name,
                 //Roles = contactViewModel.SesRoles //impossible Roles est seulement en lecture....
-                PasswordHash = contactViewModel.Password                
+                PasswordHash = contactViewModel.Password
             };
             return contact;
         }

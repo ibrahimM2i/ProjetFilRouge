@@ -5,7 +5,7 @@
 }
 
 @Html.HiddenFor(model => model.Id)
-
+@Html.HiddenFor(model => model.OldRoleId)
 
 <div class="form-group">
     @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -42,17 +42,27 @@
 </div>
 
 <div class="form-group">
-    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+    
+    @if (ViewBag.ModeEdition)
+    {
+        <label class="control-label col-md-2" for="Password">Nouveau Mot de passe</label>
+    }
+    else
+    {
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+    }
+
     <div class="col-md-10">
         @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
     </div>
 </div>
 
 <div class="form-group">
+    @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-        @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.DropDownListFor(m => m.RoleName, (List<SelectListItem>)ViewBag.Roles, "Selectionnez un role")
-        @Html.ValidationMessageFor(m => m.RoleName) [ Role Actuel : @Model.RoleName ]
+        @Html.DropDownListFor(m => m.RoleId, (List<SelectListItem>)ViewBag.Roles, "Selectionnez un role")
+        @Html.ValidationMessageFor(m => m.RoleId, "", new { @class = "text-danger" })
     </div>
 </div>
 <!--
