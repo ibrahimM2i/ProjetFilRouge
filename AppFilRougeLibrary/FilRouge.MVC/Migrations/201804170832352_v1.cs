@@ -3,7 +3,7 @@ namespace FilRouge.MVC.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class contactChangerPourUSer1 : DbMigration
+    public partial class v1 : DbMigration
     {
         public override void Up()
         {
@@ -64,6 +64,7 @@ namespace FilRouge.MVC.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
