@@ -27,7 +27,7 @@ namespace FilRouge.MVC.Entities
         [ForeignKey("Technology")]
         public int TechnologyId {get; set;}
         [ForeignKey("Contact")]
-        public int ContactId { get; set; }
+        public string ContactId { get; set; }
         #endregion
         #region Association
 

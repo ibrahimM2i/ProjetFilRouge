@@ -47,8 +47,18 @@ namespace FilRouge.MVC.Controllers
 			if (ModelState.IsValid)
 			{
 				Id = _questionService.AddQuestion(questionViewModel);
-				//return RedirectToAction("Index", "Home");
-			}
+                var typeQuestion = _typeQuestionsService.GetTypeQuestion(questionViewModel.QuestionType.TypeQuestionId);
+                if (typeQuestion.NameType.ToLower() != "choix libre")
+                {
+                    return RedirectToAction("Create", "Reponses", new { id = Id });
+                }
+                else
+                {
+                    return RedirectToAction("Details", new { id = Id });
+                }
+
+                //return RedirectToAction("Index", "Home");
+            }
 			var technologiesListItem = _technologiesService.GetListItemsTechnologies();
 			var typeQuestionsListItem = _typeQuestionsService.GetListItemQuestionType();
 			var difficultiesListItem = _difficultyServices.GetListItemsDifficulties();
@@ -56,20 +66,6 @@ namespace FilRouge.MVC.Controllers
 			ViewBag.Difficulties = difficultiesListItem;
 			ViewBag.Technologies = technologiesListItem;
 			ViewBag.QuestionType = typeQuestionsListItem;
-
-			var typeQuestion = _typeQuestionsService.GetTypeQuestion(questionViewModel.QuestionType.TypeQuestionId);
-			if (typeQuestion != null)
-			{
-				if (typeQuestion.NameType.ToLower() != "choix libre")
-				{
-					return RedirectToRoute("ReponsesCreate", new { id = Id });
-				}
-				else
-				{
-					return RedirectToAction("Details", new { id = Id });
-				}
-				
-			}
 
 			return View(questionViewModel);
 		}

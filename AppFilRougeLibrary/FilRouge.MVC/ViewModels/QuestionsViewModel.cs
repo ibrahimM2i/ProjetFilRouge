@@ -18,8 +18,11 @@ namespace FilRouge.MVC.ViewModels
 		[Display(Name = "Active ? ")]
 		public bool Active { get; set; }
 
+        [Required]
 		public TypeQuestion QuestionType { get; set; }
-		public Technology Technology { get; set; }
-		public Difficulty Difficulty { get; set; }
+        [Required]
+        public Technology Technology { get; set; }
+        [Required]
+        public Difficulty Difficulty { get; set; }
 	}
 }

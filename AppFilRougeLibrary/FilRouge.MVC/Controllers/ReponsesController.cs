@@ -11,8 +11,10 @@ namespace FilRouge.Web.Controllers
     public class ReponsesController : Controller
     {
         private QuestionService _questionService = new QuestionService();
+        private ReponsesServices _reponseService = new ReponsesServices();
 
-        // GET: Reponse/Create/idQuestion
+        // GET: Reponse/Create/id
+        [HttpGet]
         public ActionResult Create(int id)
         {
             var question = _questionService.GetQuestion(id);
@@ -20,9 +22,8 @@ namespace FilRouge.Web.Controllers
             return View(new ReponseViewModel());
         }
 
-        // POST: Reponse/Create/id
+        // POST: Reponses/Create/id
         [HttpPost]
-		[Route("Reponses/Create" , Name = "ReponsesCreate")]
         public ActionResult Create(int id, FormCollection collection)
         {
             var question = _questionService.GetQuestion(id).MapToQuestion();
@@ -33,10 +34,12 @@ namespace FilRouge.Web.Controllers
             //récupération des 4 choix et l'ajouter dans liste "reponses"
             for (int i = 1; i <= 4; i++)
             {
-                Reponses reponse = new Reponses();
-                reponse.QuestionId = question.QuestionId;
-                reponse.Content = collection.GetValue("reponse" + i).AttemptedValue;
-                reponse.TrueReponse = collection.GetValue("BonneReponse" + i).AttemptedValue == "false" ? false : true;//prend false si pas cocher
+                Reponses reponse = new Reponses
+                {
+                    QuestionId = question.QuestionId,
+                    Content = collection.GetValue("reponse" + i).AttemptedValue,
+                    TrueReponse = collection.GetValue("BonneReponse" + i).AttemptedValue == "false" ? false : true //prend false si pas cocher
+                };
                 reponses.Add(reponse);
             }
 
@@ -61,6 +64,21 @@ namespace FilRouge.Web.Controllers
 			}
 
 			return View();
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var reponse = _reponseService.GetReponsesById(id);
+            var question = _questionService.GetQuestion(id);
+            ViewBag.Question = question;
+            return View(reponse);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            return RedirectToAction("Questions", "Questions");
         }
 
     }

@@ -1,0 +1,14 @@
+﻿Fonctionnalités attendues :
+	- Création et édition de Technologies
+	- Création et édition de niveau d'expériences
+	- Création et édition de questions
+	- Création et édition de niveau de questions (réponses)
+	- Création et édition d'un quiz
+	- Visualisation des détails du quiz (résultats)
+	- Ecran de connexion
+	- Passage du quiz technique
+	- Présentation des résultats (mail, pdf, page web)
+
+Hébergement :
+	- Hébergement Azure
+	- Accessible sur mobile (Android)

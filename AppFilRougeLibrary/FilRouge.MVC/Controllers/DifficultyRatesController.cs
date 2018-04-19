@@ -52,7 +52,7 @@ namespace FilRouge.MVC.Controllers
             {
                 db.DifficultyRates.Add(difficultyRate);
                 db.SaveChanges();
-                return RedirectToAction("DifficultyRates");
+                return RedirectToAction("Index");
             }
 
             ViewBag.DifficultyId = new SelectList(db.Difficulties, "DifficultyId", "DifficultyName", difficultyRate.DifficultyId);

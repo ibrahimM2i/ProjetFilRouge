@@ -8,14 +8,14 @@
 <div class="panel panel-default">
     <div class="panel-heading">Question id = @ViewBag.Question.QuestionId</div>
     <div class="panel-body">
-        @ViewBag.Question.Content
+        Intitulé de la question : @ViewBag.Question.Content
         <br />
-        <small>@ViewBag.Question.Commentaire</small>
+        <small>Commentaire de la question : @ViewBag.Question.Commentaire</small>
     </div>
 </div>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Reponses", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -37,13 +37,9 @@
     <div class="row">
         <div class="form-group">
             <div class="col-md-10">
-                <input type="submit" value="Créer les réponses" class="btn btn-default" />
+                <input type="submit" value="Créer les réponses" class="btn btn-default"/>
             </div>
         </div>
     </div>
 
 }
-<br />
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

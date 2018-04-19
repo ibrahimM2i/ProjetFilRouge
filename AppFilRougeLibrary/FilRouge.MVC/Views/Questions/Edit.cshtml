@@ -17,3 +17,12 @@
         </div>
     </div>
 }
+
+@using (Html.BeginForm("Edit/"+ Model.QuestionId, "Reponses"))
+{
+    <div class="form-group">
+        <div class="col-md-offset-2 Col-md-10">
+            <input type="submit" value="Modifier les réponses" class="btn-default" />
+        </div>
+    </div>
+}
