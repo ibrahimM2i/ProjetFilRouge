@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<FilRouge.MVC.ViewModels.QuestionViewModel>
+﻿@model IEnumerable<FilRouge.MVC.ViewModels.QuestionViewModel>
 
 @{
     ViewBag.Title = "Questions";
@@ -54,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.Difficulty.DifficultyName)
         </td>
         <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
             @Html.ActionLink("Details", "Details", new { id = item.QuestionId })
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>
     </tr>

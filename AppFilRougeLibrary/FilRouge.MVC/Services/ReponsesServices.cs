@@ -21,7 +21,6 @@ namespace FilRouge.MVC.Services
                     reponses.Add(rep);
                 }
             }
-
             return reponses;
         }
         

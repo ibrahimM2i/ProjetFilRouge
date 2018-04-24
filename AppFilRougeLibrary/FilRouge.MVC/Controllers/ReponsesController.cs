@@ -5,6 +5,7 @@ using FilRouge.MVC.Services;
 using FilRouge.MVC.ViewModels;
 using FilRouge.MVC.ViewModels.Maps;
 using FilRouge.Web.ViewModels;
+using FilRouge.Web.ViewModels.Maps;
 
 namespace FilRouge.Web.Controllers
 {
@@ -32,15 +33,16 @@ namespace FilRouge.Web.Controllers
             List<Reponses> reponses = new List<Reponses>();
 
             //récupération des 4 choix et l'ajouter dans liste "reponses"
-            for (int i = 1; i <= 4; i++)
+            for (int i = 0; i <= 3; i++)
             {
                 Reponses reponse = new Reponses
                 {
                     QuestionId = question.QuestionId,
-                    Content = collection.GetValue("reponse" + i).AttemptedValue,
-                    TrueReponse = collection.GetValue("BonneReponse" + i).AttemptedValue == "false" ? false : true //prend false si pas cocher
+                    Content = collection.GetValue("[" + i + "].Reponse" + reponses[i].ReponseId + i).AttemptedValue,
+                    TrueReponse = collection.GetValue("[" + i + "].BonneReponse" + reponses[i].ReponseId + i).AttemptedValue == "false" ? false : true //prend false si pas cocher
                 };
-                reponses.Add(reponse);
+                if(reponse.Content != "")
+                    reponses.Add(reponse);
             }
 
 			/* /!\ impossible d'utiliser la méthode Edit du serviceQuestion, car le "ViewModel" et le "Mapping" ne prend
@@ -69,16 +71,42 @@ namespace FilRouge.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var reponse = _reponseService.GetReponsesById(id);
+            var reponsesViewModel = new List<ReponseViewModel>();
             var question = _questionService.GetQuestion(id);
+            foreach(var rep in question.Reponses)
+            {
+                reponsesViewModel.Add(rep.MapToReponseViewModel());
+            }
+            
             ViewBag.Question = question;
-            return View(reponse);
+
+            return View(reponsesViewModel);
         }
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            return RedirectToAction("Questions", "Questions");
+            var question = _questionService.GetQuestion(id);
+            ViewBag.Question = question;
+
+            List<Reponses> reponses = _reponseService.GetReponsesById(id);
+
+            //récupération des 4 choix et l'ajouter dans liste "reponses"
+            for (int i = 0; i < reponses.Count; i++)
+            {
+                reponses[i].QuestionId = question.QuestionId;
+                reponses[i].Content = collection.GetValue("[" + i + "].Reponse" + reponses[i].ReponseId).AttemptedValue;
+                reponses[i].TrueReponse = collection.GetValue("[" + i + "].BonneReponse" + reponses[i].ReponseId).AttemptedValue == "false" ? false: true;
+            }
+
+            question.MapToQuestion();
+
+            var nbRes = _questionService.EditReponsesToQuestion(id, reponses);
+            if (nbRes > 0)
+            {
+                return RedirectToAction("Questions", "Questions");
+            }
+            return View();
         }
 
     }

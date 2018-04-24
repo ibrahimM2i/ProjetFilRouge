@@ -24,5 +24,7 @@ namespace FilRouge.MVC.ViewModels
         public Technology Technology { get; set; }
         [Required]
         public Difficulty Difficulty { get; set; }
+
+        public List<Reponses> Reponses { get; set; }
 	}
 }

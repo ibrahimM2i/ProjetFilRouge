@@ -49,7 +49,7 @@ namespace FilRouge.MVC.Services
 			using (var dbContext = new FilRougeDBContext())
 			{
 				question = dbContext.Questions
-                    .Include("Technology").Include("TypeQuestion").Include("Difficulty")
+                    .Include("Technology").Include("TypeQuestion").Include("Difficulty").Include("Reponses")
                     .Where(q => q.QuestionId == id)
                     .Select(q => q).First();
 			}
@@ -112,8 +112,23 @@ namespace FilRouge.MVC.Services
 				int nbRes = db.SaveChanges();
 				return nbRes;
 			}
-			
 		}
+
+        public int EditReponsesToQuestion(int id, List<Reponses> reponses)
+        {
+            using (var db = new FilRougeDBContext())
+            {
+                var questionEditReponses = db.Questions.Find(id).Reponses.ToList();
+
+                for(int i = 0; i < questionEditReponses.Count; i++)
+                {
+                    questionEditReponses[i].Content = reponses[i].Content;
+                    questionEditReponses[i].TrueReponse = reponses[i].TrueReponse;
+                }
+                int nbRes = db.SaveChanges();
+                return nbRes;
+            }
+        }
 		#endregion
 	}
 }

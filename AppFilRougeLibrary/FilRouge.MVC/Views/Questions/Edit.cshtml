@@ -9,20 +9,11 @@
     @Html.AntiForgeryToken()
     @Html.EditorFor(m => m)
 
-    @Html.ActionLink("Back to List", "Questions")
-
     <div class="form-group">
         <div class="col-md-offset-2 Col-md-10">
             <input type="submit" value="Modifier" class="btn-default" />
         </div>
     </div>
 }
-
-@using (Html.BeginForm("Edit/"+ Model.QuestionId, "Reponses"))
-{
-    <div class="form-group">
-        <div class="col-md-offset-2 Col-md-10">
-            <input type="submit" value="Modifier les réponses" class="btn-default" />
-        </div>
-    </div>
-}
+@Html.ActionLink("Back to List", "Questions") | 
+@Html.ActionLink("Modifier les réponses", "Edit/" + Model.QuestionId, "Reponses")

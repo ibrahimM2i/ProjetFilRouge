@@ -137,7 +137,7 @@ namespace FilRouge.MVC.Services
         public static void CreateQuizz(int userid, int difficultymasterid, int technoid,string nomuser, string prenomuser, bool questionlibre, int nombrequestions)
         {
             List<Questions> questionsQuizz = AddQuestionToQuizz(questionlibre, nombrequestions, technoid, difficultymasterid);
-            int timer = 0;
+            //int timer = 0;
             FilRougeDBContext db = new FilRougeDBContext();
            /* try
             {

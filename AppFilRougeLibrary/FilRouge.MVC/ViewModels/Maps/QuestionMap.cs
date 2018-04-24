@@ -19,15 +19,16 @@ namespace FilRouge.MVC.ViewModels.Maps
 			var questionsViewModel = new QuestionViewModel();
 			if (question == null)
 				return questionsViewModel;
-			questionsViewModel = new QuestionViewModel
-			{
-				QuestionId = question.QuestionId,
-				Content = question.Content,
-				Commentaire = question.Commentaire,
-				Active = question.Active,
-				QuestionType = question.TypeQuestion,
-				Technology = question.Technology,
-				Difficulty = question.Difficulty
+            questionsViewModel = new QuestionViewModel
+            {
+                QuestionId = question.QuestionId,
+                Content = question.Content,
+                Commentaire = question.Commentaire,
+                Active = question.Active,
+                QuestionType = question.TypeQuestion,
+                Technology = question.Technology,
+                Difficulty = question.Difficulty,
+                Reponses = question.Reponses.ToList()
 				//TODO	Rajouter difficultiesID quand pret
 			};
 			return questionsViewModel;
@@ -52,10 +53,10 @@ namespace FilRouge.MVC.ViewModels.Maps
 				Active = questionsViewModel.Active,
 				TechnologyId = questionsViewModel.Technology.TechnoId,
 				QuestionTypeId = questionsViewModel.QuestionType.TypeQuestionId,
-				DifficultyId = questionsViewModel.Difficulty.DifficultyId		
+				DifficultyId = questionsViewModel.Difficulty.DifficultyId,
+                Reponses = questionsViewModel.Reponses
 			};
 			return question;
-
 		}
 
 		#endregion
